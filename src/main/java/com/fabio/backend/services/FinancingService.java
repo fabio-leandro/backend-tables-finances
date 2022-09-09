@@ -21,6 +21,7 @@ public class FinancingService {
         List<TableFinancing> tb = new ArrayList<>();
         List<TableFinancingCalculo> tbc = new ArrayList<>();
 
+        if (financing.getEntrance() > 0) financing.setFinancedAmount(financing.getFinancedAmount() - financing.getEntrance());
 
         for (int i = 0; i <= financing.getPeriod(); i++){
             if(i == 0) {
@@ -49,6 +50,7 @@ public class FinancingService {
                 tbc.add(tbf);
 
                 TableFinancing tbl = new TableFinancing(tbf.getNumber(), df.format(tbf.getPayment()), df.format(tbf.getInterest()), df.format(tbf.getAmortization()), df.format(tbf.getBalance()));
+                if (tbl.getBalance().equals("-0,00") ) tbl.setBalance("0,00");
                 tb.add(tbl);
             }
         }
@@ -66,6 +68,8 @@ public class FinancingService {
 
         List<TableFinancing> tb = new ArrayList<>();
         List<TableFinancingCalculo> tbc = new ArrayList<>();
+
+        if (financing.getEntrance() > 0) financing.setFinancedAmount(financing.getFinancedAmount() - financing.getEntrance());
 
         double numerador = Math.pow((1+ (financing.getRate()/100)), financing.getPeriod()) * financing.getRate() / 100;
         double denominador = Math.pow((1+ (financing.getRate()/100)), financing.getPeriod()) - 1;
