@@ -71,9 +71,11 @@ public class FinancingService {
 
         if (financing.getEntrance() > 0) financing.setFinancedAmount(financing.getFinancedAmount() - financing.getEntrance());
 
-        double numerador = Math.pow((1+ (financing.getRate()/100)), financing.getPeriod()) * financing.getRate() / 100;
-        double denominador = Math.pow((1+ (financing.getRate()/100)), financing.getPeriod()) - 1;
-        double prestacao = (financing.getFinancedAmount() * (numerador / denominador));
+//        double numerador = Math.pow((1+ (financing.getRate()/100)), financing.getPeriod()) * financing.getRate() / 100;
+//        double denominador = Math.pow((1+ (financing.getRate()/100)), financing.getPeriod()) - 1;
+//        double prestacao = (financing.getFinancedAmount() * (numerador / denominador));
+
+        double prestacao = getPaymentPrice(financing.getFinancedAmount(), financing.getRate(), financing.getPeriod());
 
         for (int i = 0; i <= financing.getPeriod(); i++){
             if(i == 0) {
@@ -107,6 +109,12 @@ public class FinancingService {
         }
 
         return tb;
+    }
+
+    public static double getPaymentPrice(double valor, double taxa, double periodo){
+        double numerador = Math.pow((1+ (taxa/100)), periodo) * taxa / 100;
+        double denominador = Math.pow((1+ (taxa/100)), periodo) - 1;
+        return (valor * (numerador / denominador));
     }
 
 

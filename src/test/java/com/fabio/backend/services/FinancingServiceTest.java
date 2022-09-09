@@ -21,6 +21,18 @@ public class FinancingServiceTest {
     private final List<TableFinancing> tabelaSACEntrada = SACTableExampleEntrance.sacEntrance;
 
     @Test
+    void shouldReturnPaymentTableOfPrice(){
+        //P = PV * ( ((1+i)n * i) / ((1+i)n - 1) )
+        var valorFinanciado = 30000.00;
+        var periodo = 24;
+        var taxa = 1.2;
+        var esperado = 1446.061951275023;
+        var obtido = FinancingService.getPaymentPrice(valorFinanciado,taxa,periodo);
+        Assertions.assertEquals(esperado,obtido);
+
+    }
+
+    @Test
     void shouldReturnFinancingTableOfPrice(){
         Financing financing = new Financing(Table.PRICE,30000d, 0d,1.2, RateType.MENSAL,24);
         List<TableFinancing> esperado = tabelaPrice;
@@ -75,8 +87,6 @@ public class FinancingServiceTest {
             Assertions.assertEquals(esperado.get(i).getBalance().strip(),obtido.get(i).getBalance());
         }
     }
-
-
 
 
 }
