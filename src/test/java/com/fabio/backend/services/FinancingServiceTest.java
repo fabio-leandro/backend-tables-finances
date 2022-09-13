@@ -20,6 +20,12 @@ public class FinancingServiceTest {
     private final List<TableFinancing> tabelaPriceEntrada = PriceTableExapleWithEntrance.priceEntrance;
     private final List<TableFinancing> tabelaSACEntrada = SACTableExampleEntrance.sacEntrance;
 
+    private FinancingService financingService;
+
+    void setup(){
+        financingService = new FinancingService();
+    }
+
     @Test
     void shouldReturnPaymentTableOfPrice(){
         //P = PV * ( ((1+i)n * i) / ((1+i)n - 1) )
@@ -36,7 +42,7 @@ public class FinancingServiceTest {
     void shouldReturnFinancingTableOfPrice(){
         Financing financing = new Financing(Table.PRICE,30000d, 0d,1.2, RateType.MENSAL,24);
         List<TableFinancing> esperado = tabelaPrice;
-        List<TableFinancing> obtido = FinancingService.getFinancingPriceTable(financing);
+        List<TableFinancing> obtido = financingService.getFinancingPriceTable(financing);
         for (int i = 0; i < tabelaPrice.size();i++){
             Assertions.assertEquals(esperado.get(i).getNumber(),obtido.get(i).getNumber());
             Assertions.assertEquals(esperado.get(i).getPayment(),obtido.get(i).getPayment());
@@ -50,7 +56,7 @@ public class FinancingServiceTest {
     void shouldReturnFinancingTableOfSAC(){
         Financing financing = new Financing(Table.SAC,30000d, 0d,1.2, RateType.MENSAL,24);
         List<TableFinancing> esperado = tabelaSAC;
-        List<TableFinancing> obtido = FinancingService.getFinancingSACTable(financing);
+        List<TableFinancing> obtido = financingService.getFinancingSACTable(financing);
         for (int i = 0; i < tabelaSAC.size();i++){
             Assertions.assertEquals(esperado.get(i).getNumber(),obtido.get(i).getNumber());
             Assertions.assertEquals(esperado.get(i).getPayment().strip(),obtido.get(i).getPayment());
@@ -64,7 +70,7 @@ public class FinancingServiceTest {
     void shouldReturnFinancingTablePriceWithEntrance(){
         Financing financing = new Financing(Table.PRICE,30000d, 5000d,1.2, RateType.MENSAL,24);
         List<TableFinancing> esperado = tabelaPriceEntrada;
-        List<TableFinancing> obtido = FinancingService.getFinancingPriceTable(financing);
+        List<TableFinancing> obtido = financingService.getFinancingPriceTable(financing);
         for (int i = 0; i < tabelaPriceEntrada.size();i++){
             Assertions.assertEquals(esperado.get(i).getNumber(),obtido.get(i).getNumber());
             Assertions.assertEquals(esperado.get(i).getPayment().strip(),obtido.get(i).getPayment());
@@ -78,7 +84,7 @@ public class FinancingServiceTest {
     void shouldReturnFinancingTableSACWithEntrance(){
         Financing financing = new Financing(Table.SAC,30000d, 5000d,1.2, RateType.MENSAL,24);
         List<TableFinancing> esperado = tabelaSACEntrada;
-        List<TableFinancing> obtido = FinancingService.getFinancingSACTable(financing);
+        List<TableFinancing> obtido = financingService.getFinancingSACTable(financing);
         for (int i = 0; i < tabelaSACEntrada.size();i++){
             Assertions.assertEquals(esperado.get(i).getNumber(),obtido.get(i).getNumber());
             Assertions.assertEquals(esperado.get(i).getPayment().strip(),obtido.get(i).getPayment());

@@ -13,9 +13,7 @@ import java.util.List;
 @Service
 public class FinancingService {
 
-
-
-    public static List<TableFinancing> getFinancingSACTable(Financing financing){
+    public List<TableFinancing> getFinancingSACTable(Financing financing){
         DecimalFormat df = new DecimalFormat("0.00");
         df.setRoundingMode(RoundingMode.HALF_UP);
         List<TableFinancing> tb = new ArrayList<>();
@@ -62,7 +60,7 @@ public class FinancingService {
 
     //P = PV * ( ((1+i)n * i) / ((1+i)n - 1) )
 
-    public static List<TableFinancing> getFinancingPriceTable(Financing financing){
+    public List<TableFinancing> getFinancingPriceTable(Financing financing){
         DecimalFormat df = new DecimalFormat("0.00");
         df.setRoundingMode(RoundingMode.HALF_UP);
 
