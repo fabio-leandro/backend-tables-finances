@@ -3,11 +3,13 @@ package com.fabio.backend.models;
 import com.fabio.backend.models.enums.RateType;
 import com.fabio.backend.models.enums.Table;
 
+import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
 public class Financing {
 
-    private Table table;
+    @Pattern(regexp = "(?i)PRICE|(?i)SAC", message = "Infomre tabelas PRICE ou SAC.")
+    private String table;
     private Double financedAmount;
     private Double entrance;
     private Double rate;
@@ -16,7 +18,7 @@ public class Financing {
 
     public Financing(){}
 
-    public Financing(Table table, Double financedAmount, Double entrance, Double rate, RateType rateType, Integer period) {
+    public Financing(String table, Double financedAmount, Double entrance, Double rate, RateType rateType, Integer period) {
         this.table = table;
         this.financedAmount = financedAmount;
         this.entrance = entrance;
@@ -25,11 +27,11 @@ public class Financing {
         this.period = period;
     }
 
-    public Table getTable() {
+    public String getTable() {
         return table;
     }
 
-    public void setTable(Table table) {
+    public void setTable(String table) {
         this.table = table;
     }
 
