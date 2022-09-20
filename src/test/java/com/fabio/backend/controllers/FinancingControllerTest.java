@@ -6,7 +6,6 @@ import com.fabio.backend.exemples.SACTableExample;
 import com.fabio.backend.models.Financing;
 import com.fabio.backend.models.TableFinancing;
 import com.fabio.backend.models.enums.RateType;
-import com.fabio.backend.models.enums.Table;
 import com.fabio.backend.services.FinancingService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -35,7 +34,7 @@ public class FinancingControllerTest {
 
     @Test
     void shouldReturnStatusCreatedForPriceTable(){
-        Financing financing = new Financing(Table.PRICE,30000d, 0d,1.2, RateType.MENSAL,24);
+        Financing financing = new Financing("PRICE",30000d, 0d,1.2, "MENSAL",24);
         Mockito.when(financingService.getFinancingPriceTable(financing)).thenReturn(tabelaPrice);
         var response = financingController.getFinancingPriceTable(financing);
         Assertions.assertEquals(ResponseEntity.status(HttpStatus.CREATED).body(tabelaPrice),response);
@@ -43,7 +42,7 @@ public class FinancingControllerTest {
 
     @Test
     void shouldReturnStatusCreatedForSacTable(){
-        Financing financing = new Financing(Table.SAC,30000d, 0d,1.2, RateType.MENSAL,24);
+        Financing financing = new Financing("SAC",30000d, 0d,1.2, "MENSAL",24);
         Mockito.when(financingService.getFinancingSACTable(financing)).thenReturn(tabelaSac);
         var response = financingController.getFinancingSacTable(financing);
         Assertions.assertEquals(ResponseEntity.status(HttpStatus.CREATED).body(tabelaSac),response);

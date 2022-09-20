@@ -6,8 +6,6 @@ import com.fabio.backend.exemples.SACTableExample;
 import com.fabio.backend.exemples.SACTableExampleEntrance;
 import com.fabio.backend.models.Financing;
 import com.fabio.backend.models.TableFinancing;
-import com.fabio.backend.models.enums.RateType;
-import com.fabio.backend.models.enums.Table;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +38,7 @@ public class FinancingServiceTest {
 
     @Test
     void shouldReturnFinancingTableOfPrice(){
-        Financing financing = new Financing(Table.PRICE,30000d, 0d,1.2, RateType.MENSAL,24);
+        Financing financing = new Financing("PRICE",30000d, 0d,1.2, "MENSAL",24);
         List<TableFinancing> esperado = tabelaPrice;
         List<TableFinancing> obtido = financingService.getFinancingPriceTable(financing);
         for (int i = 0; i < tabelaPrice.size();i++){
@@ -54,7 +52,7 @@ public class FinancingServiceTest {
 
     @Test
     void shouldReturnFinancingTableOfSAC(){
-        Financing financing = new Financing(Table.SAC,30000d, 0d,1.2, RateType.MENSAL,24);
+        Financing financing = new Financing("SAC",30000d, 0d,1.2, "MENSAL",24);
         List<TableFinancing> esperado = tabelaSAC;
         List<TableFinancing> obtido = financingService.getFinancingSACTable(financing);
         for (int i = 0; i < tabelaSAC.size();i++){
@@ -68,7 +66,7 @@ public class FinancingServiceTest {
 
     @Test
     void shouldReturnFinancingTablePriceWithEntrance(){
-        Financing financing = new Financing(Table.PRICE,30000d, 5000d,1.2, RateType.MENSAL,24);
+        Financing financing = new Financing("PRICE",30000d, 5000d,1.2, "MENSAL",24);
         List<TableFinancing> esperado = tabelaPriceEntrada;
         List<TableFinancing> obtido = financingService.getFinancingPriceTable(financing);
         for (int i = 0; i < tabelaPriceEntrada.size();i++){
@@ -82,7 +80,7 @@ public class FinancingServiceTest {
 
     @Test
     void shouldReturnFinancingTableSACWithEntrance(){
-        Financing financing = new Financing(Table.SAC,30000d, 5000d,1.2, RateType.MENSAL,24);
+        Financing financing = new Financing("SAC",30000d, 5000d,1.2, "MENSAL",24);
         List<TableFinancing> esperado = tabelaSACEntrada;
         List<TableFinancing> obtido = financingService.getFinancingSACTable(financing);
         for (int i = 0; i < tabelaSACEntrada.size();i++){
